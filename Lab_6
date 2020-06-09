@@ -1,80 +1,183 @@
-enter_prize = float(input('Please, enter your maximum prize: '))
+import random as r
 
-class bus:
-    coffee_beans = ['Arabica beans', 'Robusta beans', 'Liberica beans', 'Exselsa beans']
-    coffee_ground = ['Arabica ground', 'Robusta ground', 'Liberica ground', 'Exselsa ground']
-    coffee_soluble = ['Arabica soluble', 'Robusta soluble', 'Liberica soluble', 'Exselsa soluble']
-    coffee_jar = ['Arabica in jar', 'Robusta in jar', 'Liberica in jar', 'Exselsa in jar']
-    coffee_packed = ['Arabica packed', 'Robusta packed', 'Liberica packed', 'Exselsa packed']
 
-    def sort_prize(self):
-        c_b = self.coffee_beans
-        c_g = self.coffee_ground
-        c_s = self.coffee_soluble
-        c_j = self.coffee_jar
-        c_p = self.coffee_packed
-        cpb = [[c_b[0], 50.0], [c_b[1], 80.0], [c_b[2], 100.0], [c_b[3], 115.0]]
-        cpg = [[c_g[0], 60.0], [c_g[1], 90.0], [c_g[2], 110.0], [c_g[3], 125.0]]
-        cps = [[c_s[0], 80.0], [c_s[1], 110.0], [c_s[2], 130.0], [c_s[3], 145.0]]
-        cpj = [[c_j[0], 85.0], [c_j[1], 115.0], [c_j[2], 135.0], [c_j[3], 150.0]]
-        cpp = [[c_p[0], 100.0], [c_p[1], 130.0], [c_p[2], 150.0], [c_p[3], 165.0]]
-        all = cpb + cpg + cps + cpj + cpp
-        all.sort(key=lambda i: i[1], reverse = 1)
-        print("Sorted by prize: ")
-        for i in all:
-            print((i[0], i[1]))
+class Product():
+    package = 25
+    coffee_beans = {'Arabica beans': [50.0, 100], 'Robusta beans': [80.0, 120], 'Liberica beans': [100.0, 116],
+                    'Exselsa beans': [115.0, 130]}
+    coffee_ground = {'Arabica ground': [60.0, 105], 'Robusta ground': [90.0, 125], 'Liberica ground': [110.0, 121],
+                     'Exselsa ground': [125.0, 135]}
+    coffee_soluble = {'Arabica soluble': [80.0, 150], 'Robusta soluble': [110, 170], 'Liberica soluble': [130.0, 160],
+                      'Exselsa soluble': [145, 180]}
+    coffee_jar = {'Arabica in jar': [85.0, 350], 'Robusta in jar': [115.0, 370], 'Liberica in jar': [135.0, 360],
+                  'Exselsa in jar': [150.0, 380]}
+    coffee_packed = {'Arabica packed': [100.0, 250], 'Robusta packed': [130.0, 270], 'Liberica packed': [150.0, 260],
+                     'Exselsa packed': [165.0, 280]}
 
-    def sort_weight(self):
-        packege = 150
-        c_b = self.coffee_beans
-        c_g = self.coffee_ground
-        c_s = self.coffee_soluble
-        c_j = self.coffee_jar
-        c_p = self.coffee_packed
-        cwb = [[c_b[0], 100], [c_b[1], 120], [c_b[2], 116], [c_b[3], 130]]
-        cwg = [[c_g[0], 105], [c_g[1], 125], [c_g[2], 121], [c_g[3], 135]]
-        cws = [[c_s[0], 150], [c_s[1], 170], [c_s[2], 160], [c_s[3], 180]]
-        cwj = [[c_j[0], 350], [c_j[1], 370], [c_j[2], 360], [c_j[3], 380]]
-        cwp = [[c_p[0], 250], [c_p[1], 270], [c_p[2], 260], [c_p[3], 280]]
-        cwpb = [[c_b[0], 100 + packege], [c_b[1], 120 + packege], [c_b[2], 116 + packege], [c_b[3], 130 + packege]]
-        cwpg = [[c_g[0], 105 + packege], [c_g[1], 125 + packege], [c_g[2], 121 + packege], [c_g[3], 135 + packege]]
-        cwps = [[c_s[0], 150 + packege], [c_s[1], 170 + packege], [c_s[2], 160 + packege], [c_s[3], 180 + packege]]
-        cwpj = [[c_j[0], 350 + packege], [c_j[1], 370 + packege], [c_j[2], 360 + packege], [c_j[3], 380 + packege]]
-        cwpp = [[c_p[0], 250 + packege], [c_p[1], 270 + packege], [c_p[2], 260 + packege], [c_p[3], 280 + packege]]
-        all_b = cwb + cwg + cws + cwj + cwp
-        all_b.sort(key=lambda i: i[1], reverse=1)
-        print("Sorted by weight: ")
-        for i in all_b:
-            print((i[0], i[1]))
-        all_bp = cwpb + cwpg + cwps + cwpj + cwpp
-        all_bp.sort(key=lambda i: i[1], reverse=1)
-        print("Sorted by weight with packege: ")
-        for i in all_bp:
-            print((i[0], i[1]))
+    def __init__(self, product):
+        self.product = product
+        if product in self.coffee_beans:
+            self.price = self.coffee_beans[product][0]
+            self.weight = self.coffee_beans[product][1]
+            self.quality = self.price / self.weight
+            self.coffee_beans = Coffee_beans(self.price, self.weight, self.quality, self.product)
+        if product in self.coffee_ground:
+            self.price = self.coffee_ground[product][0]
+            self.weight = self.coffee_ground[product][1]
+            self.quality = self.price / self.weight
+            self.coffee_ground = Coffee_ground(self.price, self.weight, self.quality, self.product)
+        if product in self.coffee_soluble:
+            self.price = self.coffee_soluble[product][0]
+            self.weight = self.coffee_soluble[product][1]
+            self.quality = self.price / self.weight
+            self.coffee_soluble = Coffee_soluble(self.price, self.weight, self.quality, self.product)
+        if product in self.coffee_jar:
+            self.price = self.coffee_jar[product][0]
+            self.weight = self.coffee_jar[product][1]
+            self.quality = self.price / self.weight
+            self.coffee_jar = Coffee_jar(self.price, self.weight, self.quality, self.product)
+        if product in self.coffee_packed:
+            self.price = self.coffee_packed[product][0]
+            self.weight = self.coffee_packed[product][1]
+            self.quality = self.price / self.weight
+            self.coffee_packed = Coffee_packed(self.price, self.weight, self.quality, self.product)
 
-    def result(self):
-        pr = enter_prize
-        pr1 = ["Prize", pr]
-        c_b = self.coffee_beans
-        c_g = self.coffee_ground
-        c_s = self.coffee_soluble
-        c_j = self.coffee_jar
-        c_p = self.coffee_packed
-        cpb = [[c_b[0], 50], [c_b[1], 80], [c_b[2], 100.0], [c_b[3], 115]]
-        cpg = [[c_g[0], 60], [c_g[1], 90], [c_g[2], 110], [c_g[3], 125]]
-        cps = [[c_s[0], 80], [c_s[1], 110], [c_s[2], 130], [c_s[3], 145]]
-        cpj = [[c_j[0], 85], [c_j[1], 115], [c_j[2], 135], [c_j[3], 150]]
-        cpp = [[c_p[0], 100], [c_p[1], 130], [c_p[2], 150], [c_p[3], 165]]
-        all = cpb + cpg + cps + cpj + cpp
-        all.sort(key=lambda i: i[1], reverse=1)
-        print("All kinds of coffee that are acceptable for you: ")
-        for i in all:
-            if i[1] <= pr1[1]:
-                print((i[0], i[1]))
-        if i[1] > pr1[1]:
-            print("Sorry, you better get more money man :)")
 
-check = bus()
-check.sort_prize()
-check.sort_weight()
-check.result()
+class Van:
+    coffee_list = []
+    qualities = set()
+    def __init__(
+            self, coffee_beans=None, coffee_ground=None,
+            coffee_soluble=None, coffee_jar=None, coffee_packed=None,
+            max_weight=5000, max_price=10000):
+        self.max_weight = max_weight
+        self.max_price = max_price
+        if coffee_beans != None:
+            self.coffee_beans = coffee_beans
+            self.coffee_list.append(coffee_beans)
+        if coffee_ground != None:
+            self.coffee_ground = coffee_ground
+            self.coffee_list.append(coffee_ground)
+        if coffee_soluble != None:
+            self.coffee_soluble = coffee_soluble
+            self.coffee_list.append(coffee_soluble)
+        if coffee_jar != None:
+            self.coffee_jar = coffee_jar
+            self.coffee_list.append(coffee_jar)
+        if coffee_packed != None:
+            self.coffee_packed = coffee_packed
+            self.coffee_list.append(coffee_packed)
+        self.check()
+
+    def load(self, product):
+        if product.product in Product.coffee_beans:
+            self.coffee_beans = Product(product.product)
+            self.coffee_list.append(self.coffee_beans)
+        if product.product in Product.coffee_ground:
+            self.coffee_ground = Product(product.product)
+            self.coffee_list.append(self.coffee_ground)
+        if product.product in Product.coffee_soluble:
+            self.coffee_soluble = Product(product.product)
+            self.coffee_list.append(self.coffee_soluble)
+        if product.product in Product.coffee_jar:
+            self.coffee_jar = Product(product.product)
+            self.coffee_list.append(self.coffee_jar)
+        if product.product in Product.coffee_packed:
+            self.coffee_packed = Product(product.product)
+            self.coffee_list.append(self.coffee_packed)
+        self.check()
+
+
+    def check(self):
+        self.current_price = 0
+        self.current_weight = 0
+        for i in self.coffee_list:
+            self.current_price += i.price
+            self.current_weight += i.weight+Product.package
+        if self.current_price > self.max_price:
+            print('Ціна зависока')
+        if self.current_weight > self.max_weight:
+            print('Вага завелика')
+
+
+    def sort_quality(self, quality_range):
+        print('Кава відсортована за якістю: ')
+        for i in self.coffee_list:
+            self.qualities.add(i.quality)
+            if int(i.quality*10) in range(quality_range[0], quality_range[1]):
+                print(i.product, 'задовольняє діапазон якості')
+        for s in sorted(list(self.qualities)):
+            for q in self.coffee_list:
+                if q.quality == s:
+                    print(q.product, 'з якістю', s)
+
+
+class Coffee_beans:
+     def __init__(self, price, weight, quality, product):
+         self.price = price
+         self.weight = weight
+         self.quality = quality
+         self.name = product
+
+
+class Coffee_ground:
+    def __init__(self, price, weight, quality, product):
+        self.price = price
+        self.weight = weight
+        self.quality = quality
+        self.name = product
+
+
+class Coffee_soluble:
+    def __init__(self, price, weight, quality, product):
+        self.price = price
+        self.weight = weight
+        self.quality = quality
+        self.name = product
+
+
+class Coffee_jar:
+    def __init__(self, price, weight, quality, product):
+        self.price = price
+        self.weight = weight
+        self.quality = quality
+        self.name = product
+
+
+class Coffee_packed:
+    def __init__(self, price, weight, quality, product):
+        self.price = price
+        self.weight = weight
+        self.quality = quality
+        self.name = product
+
+
+prod_list = []
+for i in range(10):
+    x = r.randint(1, 5)
+    if x == 1:
+        Coffee = Product(list(Product.coffee_beans.keys())[r.randint(0, 3)])
+        prod_list.append(Coffee)
+    elif x == 2:
+        Coffee = Product(list(Product.coffee_ground.keys())[r.randint(0, 3)])
+        prod_list.append(Coffee)
+    elif x == 3:
+        Coffee = Product(list(Product.coffee_soluble.keys())[r.randint(0, 3)])
+        prod_list.append(Coffee)
+    elif x == 4:
+        Coffee = Product(list(Product.coffee_jar.keys())[r.randint(0, 3)])
+        prod_list.append(Coffee)
+    else:
+        Coffee = Product(list(Product.coffee_packed.keys())[r.randint(0, 3)])
+        prod_list.append(Coffee)
+
+Gazel = Van(max_price=float(input('Please, enter your maximum price: ')),
+            max_weight=float(input('Please, enter your maximum weight: ')))
+
+for i in prod_list:
+    Gazel.load(i)
+
+for i in Gazel.coffee_list:
+    print(i.product)
+
+Gazel.sort_quality((5, 9))
