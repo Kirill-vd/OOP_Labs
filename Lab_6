@@ -1,0 +1,80 @@
+enter_prize = float(input('Please, enter your maximum prize: '))
+
+class bus:
+    coffee_beans = ['Arabica beans', 'Robusta beans', 'Liberica beans', 'Exselsa beans']
+    coffee_ground = ['Arabica ground', 'Robusta ground', 'Liberica ground', 'Exselsa ground']
+    coffee_soluble = ['Arabica soluble', 'Robusta soluble', 'Liberica soluble', 'Exselsa soluble']
+    coffee_jar = ['Arabica in jar', 'Robusta in jar', 'Liberica in jar', 'Exselsa in jar']
+    coffee_packed = ['Arabica packed', 'Robusta packed', 'Liberica packed', 'Exselsa packed']
+
+    def sort_prize(self):
+        c_b = self.coffee_beans
+        c_g = self.coffee_ground
+        c_s = self.coffee_soluble
+        c_j = self.coffee_jar
+        c_p = self.coffee_packed
+        cpb = [[c_b[0], 50.0], [c_b[1], 80.0], [c_b[2], 100.0], [c_b[3], 115.0]]
+        cpg = [[c_g[0], 60.0], [c_g[1], 90.0], [c_g[2], 110.0], [c_g[3], 125.0]]
+        cps = [[c_s[0], 80.0], [c_s[1], 110.0], [c_s[2], 130.0], [c_s[3], 145.0]]
+        cpj = [[c_j[0], 85.0], [c_j[1], 115.0], [c_j[2], 135.0], [c_j[3], 150.0]]
+        cpp = [[c_p[0], 100.0], [c_p[1], 130.0], [c_p[2], 150.0], [c_p[3], 165.0]]
+        all = cpb + cpg + cps + cpj + cpp
+        all.sort(key=lambda i: i[1], reverse = 1)
+        print("Sorted by prize: ")
+        for i in all:
+            print((i[0], i[1]))
+
+    def sort_weight(self):
+        packege = 150
+        c_b = self.coffee_beans
+        c_g = self.coffee_ground
+        c_s = self.coffee_soluble
+        c_j = self.coffee_jar
+        c_p = self.coffee_packed
+        cwb = [[c_b[0], 100], [c_b[1], 120], [c_b[2], 116], [c_b[3], 130]]
+        cwg = [[c_g[0], 105], [c_g[1], 125], [c_g[2], 121], [c_g[3], 135]]
+        cws = [[c_s[0], 150], [c_s[1], 170], [c_s[2], 160], [c_s[3], 180]]
+        cwj = [[c_j[0], 350], [c_j[1], 370], [c_j[2], 360], [c_j[3], 380]]
+        cwp = [[c_p[0], 250], [c_p[1], 270], [c_p[2], 260], [c_p[3], 280]]
+        cwpb = [[c_b[0], 100 + packege], [c_b[1], 120 + packege], [c_b[2], 116 + packege], [c_b[3], 130 + packege]]
+        cwpg = [[c_g[0], 105 + packege], [c_g[1], 125 + packege], [c_g[2], 121 + packege], [c_g[3], 135 + packege]]
+        cwps = [[c_s[0], 150 + packege], [c_s[1], 170 + packege], [c_s[2], 160 + packege], [c_s[3], 180 + packege]]
+        cwpj = [[c_j[0], 350 + packege], [c_j[1], 370 + packege], [c_j[2], 360 + packege], [c_j[3], 380 + packege]]
+        cwpp = [[c_p[0], 250 + packege], [c_p[1], 270 + packege], [c_p[2], 260 + packege], [c_p[3], 280 + packege]]
+        all_b = cwb + cwg + cws + cwj + cwp
+        all_b.sort(key=lambda i: i[1], reverse=1)
+        print("Sorted by weight: ")
+        for i in all_b:
+            print((i[0], i[1]))
+        all_bp = cwpb + cwpg + cwps + cwpj + cwpp
+        all_bp.sort(key=lambda i: i[1], reverse=1)
+        print("Sorted by weight with packege: ")
+        for i in all_bp:
+            print((i[0], i[1]))
+
+    def result(self):
+        pr = enter_prize
+        pr1 = ["Prize", pr]
+        c_b = self.coffee_beans
+        c_g = self.coffee_ground
+        c_s = self.coffee_soluble
+        c_j = self.coffee_jar
+        c_p = self.coffee_packed
+        cpb = [[c_b[0], 50], [c_b[1], 80], [c_b[2], 100.0], [c_b[3], 115]]
+        cpg = [[c_g[0], 60], [c_g[1], 90], [c_g[2], 110], [c_g[3], 125]]
+        cps = [[c_s[0], 80], [c_s[1], 110], [c_s[2], 130], [c_s[3], 145]]
+        cpj = [[c_j[0], 85], [c_j[1], 115], [c_j[2], 135], [c_j[3], 150]]
+        cpp = [[c_p[0], 100], [c_p[1], 130], [c_p[2], 150], [c_p[3], 165]]
+        all = cpb + cpg + cps + cpj + cpp
+        all.sort(key=lambda i: i[1], reverse=1)
+        print("All kinds of coffee that are acceptable for you: ")
+        for i in all:
+            if i[1] <= pr1[1]:
+                print((i[0], i[1]))
+        if i[1] > pr1[1]:
+            print("Sorry, you better get more money man :)")
+
+check = bus()
+check.sort_prize()
+check.sort_weight()
+check.result()
